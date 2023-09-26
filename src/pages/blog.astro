@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import Footer from "../components/Footer.astro";
+import Navigation from "../components/Navigation.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("blog")
+---
+
+<Layout title="Blog">
+  <main>
+    <ul>
+      {allPosts.map(post => <li><a href={`/posts/${post.slug}`}>{post.data.title}</a></li>)}
+    </ul>
+  </main>
+</Layout>

@@ -1,0 +1,17 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+
+const allPosts = await getCollection("blog");
+
+const uniqueTags = [
+  ...new Set(allPosts.flatMap((post) => post.data.tags)),
+];
+---
+
+<Layout title="Tags">
+    <ul>
+        {uniqueTags.map(tag => <li><a href={`/tags/${tag}`}>{tag}</a></li>)}
+    </ul>
+</Layout>

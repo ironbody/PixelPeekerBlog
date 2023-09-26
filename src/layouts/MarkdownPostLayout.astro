@@ -1,0 +1,33 @@
+---
+import type { blogType } from "../schemas";
+import TagsList from "../components/TagsList.astro";
+import Layout from "./Layout.astro";
+import { formatISO9075 } from "date-fns";
+
+interface Props {
+  frontmatter: blogType;
+  remarkPluginFrontmatter: Record<string, any>;
+}
+const { title, pubDate, description, author, image, tags } =
+  Astro.props.frontmatter;
+const { minutesRead } = Astro.props.remarkPluginFrontmatter;
+console.log("pubdate type: ", typeof pubDate);
+const formattedPubDate = formatISO9075(pubDate, { representation: "date" });
+---
+
+<Layout title={title}>
+  <h1>{title}</h1>
+  {image && <img src={image.url} width="300" alt={image.alt} />}
+  <div class="not-prose">
+    <em>
+      <p>{description}</p>
+      <div class="flex flex-wrap items-center gap-2">
+        <p>{formattedPubDate},</p>
+        <p>{author}</p>
+        <TagsList tags={tags} />
+      </div>
+    </em>
+  </div>
+
+  <slot />
+</Layout>

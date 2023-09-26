@@ -1,0 +1,100 @@
+---
+import { Icon } from "astro-icon";
+---
+
+<div class="dropdown dropdown-hover dropdown-end">
+  <label tabindex="0" class="btn btn-ghost btn-square"><Icon name="ic:baseline-palette" class="h-5"/></label>
+  <ul
+    
+    class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box"
+  >
+    <li><button id="SetLight">Light</button></li>
+    <li><button id="SetDark">Dark</button></li>
+    <li><button id="SetAuto">Auto</button></li>
+  </ul>
+</div>
+
+<script>
+  const themes = {
+    dark: "dracula",
+    light: "retro",
+  };
+
+  const theme = (() => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme")!;
+    }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+    return "light";
+  })();
+
+  switch (theme) {
+    case "light":
+      setLightTheme();
+      break;
+    case "dark":
+      setDarkTheme();
+      break;
+    case "auto":
+      setAutoTheme();
+      break;
+    default:
+      setAutoTheme();
+      break;
+  }
+
+  window.localStorage.setItem("theme", theme);
+
+  document
+    .getElementById("SetLight")
+    ?.addEventListener("click", handleSetLight);
+  document.getElementById("SetDark")?.addEventListener("click", handleSetDark);
+  document.getElementById("SetAuto")?.addEventListener("click", handleSetAuto);
+
+  function setAutoTheme() {
+    const isDark = window.matchMedia("(prefers-color-scheme:dark)").matches;
+
+    if (!isDark) {
+      document.documentElement.dataset.theme = themes.light;
+    } else {
+      document.documentElement.dataset.theme = themes.dark;
+    }
+  }
+
+  function setDarkTheme() {
+    document.documentElement.dataset.theme = themes.dark;
+  }
+
+  function setLightTheme() {
+    document.documentElement.dataset.theme = themes.light;
+  }
+
+  function handleSetLight() {
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .removeEventListener("change", setAutoTheme);
+    
+    setLightTheme();
+    window.localStorage.setItem("theme", "light");
+  }
+
+  function handleSetDark() {
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .removeEventListener("change", setAutoTheme);
+
+    setDarkTheme();
+    window.localStorage.setItem("theme", "dark");
+  }
+
+  function handleSetAuto() {
+    window
+      .matchMedia("(prefers-color-scheme:dark)")
+      .addEventListener("change", setAutoTheme);
+
+    setAutoTheme();
+    window.localStorage.setItem("theme", "auto");
+  }
+</script>

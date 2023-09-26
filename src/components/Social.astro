@@ -1,0 +1,12 @@
+---
+import { Icon } from "astro-icon";
+interface Props {
+    platform: string,
+    link: string,
+    iconName: string
+}
+const { platform, link, iconName } = Astro.props;
+
+---
+
+<a href={link} class="btn btn-primary no-animation"><Icon name={iconName} class="h-full p-1"/>{platform}</a>
