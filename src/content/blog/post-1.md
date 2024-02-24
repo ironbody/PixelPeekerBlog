@@ -25,8 +25,14 @@ I will finish the Astro tutorial, and then keep adding more posts. Watch this sp
 - first
 - second
 
-```
-wowo
+```ts
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import "@fontsource-variable/kreon";
 
-ayy lmao
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
 ```
