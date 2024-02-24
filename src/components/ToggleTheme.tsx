@@ -85,9 +85,19 @@ export default function ToggleTheme() {
   return (
     <div className="not-prose dropdown">
       <button className="btn btn-square btn-ghost no-animation" role="button">
-        <label htmlFor="theme-button" className="swap swap-rotate" aria-label="theme switcher">
+        <label
+          htmlFor="theme-button"
+          className="swap swap-rotate"
+          aria-label="theme switcher"
+        >
           {/* this hidden checkbox controls the state */}
-          <input id="theme-button" name="theme-button" type="checkbox" checked={isLightMode} readOnly />
+          <input
+            id="theme-button"
+            name="theme-button"
+            type="checkbox"
+            checked={isLightMode}
+            readOnly
+          />
           <p className="sr-only">Theme switcher</p>
 
           <Sun className="swap-on fill-current" />
@@ -95,9 +105,7 @@ export default function ToggleTheme() {
           <Moon className="swap-off fill-current" />
         </label>
       </button>
-      <ul
-        className="menu dropdown-content rounded-box z-[1] w-52 bg-base-100 p-2 shadow"
-      >
+      <ul className="menu dropdown-content rounded-box z-[1] w-52 bg-base-100 p-2 shadow">
         <li>
           <button onClick={() => changePreference("light")}>Light</button>
         </li>
