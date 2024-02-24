@@ -83,7 +83,7 @@ export default function ToggleTheme() {
   })();
 
   return (
-    <div className="not-prose dropdown">
+    <div className="not-prose dropdown dropdown-end">
       <button className="btn btn-square btn-ghost no-animation" role="button">
         <label
           htmlFor="theme-button"
