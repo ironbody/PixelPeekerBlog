@@ -13,7 +13,6 @@ module.exports = {
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
     themes: [
-      "dracula",
       {
         retro: {
           ...require("daisyui/src/theming/themes")["[data-theme=retro]"],
@@ -22,6 +21,8 @@ module.exports = {
           "--rounded-badge": "1.9rem",
         },
       },
+      "dracula",
     ],
+    darkTheme: "dracula",
   },
 };
