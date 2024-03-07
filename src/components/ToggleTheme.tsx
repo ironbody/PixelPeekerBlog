@@ -1,35 +1,46 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Moon, Sun } from "./Icons";
 
-const themes = {
+export const themes = {
   light: "retro",
   dark: "dracula",
 };
 
 export default function ToggleTheme() {
-  const [currentTheme, setCurrentTheme] = useState<"light" | "dark">();
+  const [currentTheme, setCurrentTheme] = useState<"light" | "dark" | "auto">();
+  const [systemTheme, setSystemTheme] = useState<"light" | "dark">();
 
   useEffect(() => {
-    addDarkModeListener();
-    changePreference("auto");
-    return () => {
-      console.log("unmount");
+    const storedTheme: any = localStorage.getItem("theme") ?? "auto";
+    changePreference(storedTheme);
 
-      removeDarkModeListener();
+    const onChange = (e:MediaQueryListEvent) => {
+      if (e.matches) {
+        setSystemTheme("dark");
+      } else {
+        setSystemTheme("light");
+      }
+    }
+
+    addDarkModeListener(onChange);
+
+    return () => {
+      removeDarkModeListener(onChange);
     };
   }, []);
 
   function changePreference(newPref: "light" | "dark" | "auto") {
     switch (newPref) {
       case "auto":
+        localStorage.setItem("theme", "auto");
         setAuto();
         break;
       case "light":
-        removeDarkModeListener();
+        localStorage.setItem("theme", "light");
         setLight();
         break;
       case "dark":
-        removeDarkModeListener();
+        localStorage.setItem("theme", "dark");
         setDark();
         break;
       default:
@@ -37,16 +48,18 @@ export default function ToggleTheme() {
     }
   }
 
-  function addDarkModeListener() {
+  function addDarkModeListener(listener: (e: MediaQueryListEvent) => any) {
+    console.log("added listener");
     window
       .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", setAuto);
+      .addEventListener("change", listener);
   }
 
-  function removeDarkModeListener() {
+  function removeDarkModeListener(listener: (e: MediaQueryListEvent) => any) {
+    console.log("removed listener");
     window
       .matchMedia("(prefers-color-scheme: dark)")
-      .removeEventListener("change", setAuto);
+      .removeEventListener("change", listener);
   }
 
   function setLight() {
@@ -61,24 +74,18 @@ export default function ToggleTheme() {
     setCurrentTheme("dark");
   }
 
-  function setAuto(e?: MediaQueryListEvent) {
+  function setAuto() {
+    console.log("set auto");
+
     document.documentElement.removeAttribute("data-theme");
-
-    const isDark =
-      e?.matches ?? window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-    if (isDark) {
-      setCurrentTheme("dark");
-    } else {
-      setCurrentTheme("light");
-    }
+    setCurrentTheme("auto")
   }
 
   const isLightMode = (() => {
-    if (currentTheme) {
-      return currentTheme === "light";
+    if (currentTheme == "auto") {
+      return systemTheme == "light";
     } else {
-      return window.matchMedia("(prefers-color-scheme: light)").matches;
+      return currentTheme == "light";
     }
   })();
 
