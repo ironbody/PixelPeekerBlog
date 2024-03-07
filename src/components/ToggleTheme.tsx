@@ -14,13 +14,22 @@ export default function ToggleTheme() {
     const storedTheme: any = localStorage.getItem("theme") ?? "auto";
     changePreference(storedTheme);
 
-    const onChange = (e:MediaQueryListEvent) => {
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    console.log(isDark);
+    
+    if (isDark) {
+      setSystemTheme("dark");
+    } else {
+      setSystemTheme("light");
+    }
+
+    const onChange = (e: MediaQueryListEvent) => {
       if (e.matches) {
         setSystemTheme("dark");
       } else {
         setSystemTheme("light");
       }
-    }
+    };
 
     addDarkModeListener(onChange);
 
@@ -78,7 +87,7 @@ export default function ToggleTheme() {
     console.log("set auto");
 
     document.documentElement.removeAttribute("data-theme");
-    setCurrentTheme("auto")
+    setCurrentTheme("auto");
   }
 
   const isLightMode = (() => {
