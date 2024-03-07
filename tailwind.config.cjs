@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         rokkitt: ["Rokkitt Variable", "ui-serif"],
-        kreon: ["Kreon Variable", "ui-serif"],
+        kreon: ["Kreon", "Kreon Variable", "system-ui"],
         work: ["Work Sans Variable", "ui-sans-serif"],
       },
     },
