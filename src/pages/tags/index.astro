@@ -12,6 +12,6 @@ const uniqueTags = [
 
 <Layout title="Tags">
     <ul class="capitalize">
-        {uniqueTags.map(tag => <li><a href={`/tags/${tag}`}>{tag}</a></li>)}
+        {uniqueTags.map(tag => <li><a href={`/tags/${tag}`} data-astro-prefetch>{tag}</a></li>)}
     </ul>
 </Layout>

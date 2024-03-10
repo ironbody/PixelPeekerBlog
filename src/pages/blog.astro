@@ -8,7 +8,7 @@ const allPosts = await getCollection("blog")
 <Layout title="Blog">
   <main>
     <ul>
-      {allPosts.map(post => <li><a href={`/posts/${post.slug}`}>{post.data.title}</a></li>)}
+      {allPosts.map(post => <li><a href={`/posts/${post.slug}`} data-astro-prefetch>{post.data.title}</a></li>)}
     </ul>
   </main>
 </Layout>

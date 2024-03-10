@@ -36,7 +36,7 @@ const { posts } = Astro.props;
     {
       posts.map((post) => (
         <li>
-          <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+          <a href={`/posts/${post.slug}`} data-astro-prefetch>{post.data.title}</a>
         </li>
       ))
     }
