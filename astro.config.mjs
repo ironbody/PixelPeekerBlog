@@ -12,4 +12,5 @@ export default defineConfig({
     shikiConfig: { theme: "github-dark" },
     syntaxHighlight: "shiki",
   },
+  prefetch: true,
 });
