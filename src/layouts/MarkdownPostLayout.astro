@@ -20,12 +20,11 @@ const formattedPubDate = formatISO9075(pubDate, { representation: "date" });
   <div class="not-prose">
     <em>
       <TagsList tags={tags} />
-      <div class="flex flex-wrap items-center gap-2">
-        <p>{author},</p>
-        <p>{formattedPubDate},</p>
+      <div class="flex flex-wrap items-center gap-3">
+        <p>{formattedPubDate}</p>
         <p>{minutesRead}</p>
+        <p>{author}</p>
       </div>
-      <p>{description}</p>
     </em>
   </div>
   <div class="divider"></div>
