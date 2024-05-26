@@ -1,17 +1,17 @@
 ---
-import type { blogType } from "@schemas";
 import TagsList from "@components/TagsList.astro";
+import type { blogType } from "@content/schemas";
+import { format } from "date-fns";
 import Layout from "./Layout.astro";
-import { formatISO9075, format } from "date-fns";
 
 interface Props {
   frontmatter: blogType;
+  // biome-ignore lint/suspicious/noExplicitAny: This is the type astro provides
   remarkPluginFrontmatter: Record<string, any>;
 }
-const { title, pubDate, description, author, image, tags } =
-  Astro.props.frontmatter;
+const { title, pubDate, author, image, tags } = Astro.props.frontmatter;
 const { minutesRead } = Astro.props.remarkPluginFrontmatter;
-const formattedPubDate = format(pubDate, "MMM dd, yyyy")
+const formattedPubDate = format(pubDate, "MMM dd, yyyy");
 ---
 
 <Layout title={title}>

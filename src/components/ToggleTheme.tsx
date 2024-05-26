@@ -6,17 +6,23 @@ export const themes = {
   dark: "dracula",
 };
 
+const themeStates = ["light", "dark", "auto"] as const;
+type themeStatesType = (typeof themeStates)[number];
+
 export default function ToggleTheme() {
-  const [currentTheme, setCurrentTheme] = useState<"light" | "dark" | "auto">();
+  const [currentTheme, setCurrentTheme] = useState<themeStatesType>();
   const [systemTheme, setSystemTheme] = useState<"light" | "dark">();
 
   useEffect(() => {
-    const storedTheme: any = localStorage.getItem("theme") ?? "auto";
-    changePreference(storedTheme);
+    let storedTheme = localStorage.getItem("theme") ?? "auto";
+    if (!themeStates.includes(storedTheme as themeStatesType)) {
+      storedTheme = "auto";
+    }
+    changePreference(storedTheme as themeStatesType);
 
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     console.log(isDark);
-    
+
     if (isDark) {
       setSystemTheme("dark");
     } else {
@@ -57,14 +63,14 @@ export default function ToggleTheme() {
     }
   }
 
-  function addDarkModeListener(listener: (e: MediaQueryListEvent) => any) {
+  function addDarkModeListener(listener: (e: MediaQueryListEvent) => void) {
     console.log("added listener");
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", listener);
   }
 
-  function removeDarkModeListener(listener: (e: MediaQueryListEvent) => any) {
+  function removeDarkModeListener(listener: (e: MediaQueryListEvent) => void) {
     console.log("removed listener");
     window
       .matchMedia("(prefers-color-scheme: dark)")
@@ -91,16 +97,15 @@ export default function ToggleTheme() {
   }
 
   const isLightMode = (() => {
-    if (currentTheme == "auto") {
-      return systemTheme == "light";
-    } else {
-      return currentTheme == "light";
+    if (currentTheme === "auto") {
+      return systemTheme === "light";
     }
+    return currentTheme === "light";
   })();
 
   return (
     <div className="not-prose dropdown dropdown-end">
-      <button className="btn btn-square btn-ghost no-animation" role="button">
+      <button type="button" className="btn btn-square btn-ghost no-animation">
         <label
           htmlFor="theme-button"
           className="swap swap-rotate"
@@ -123,13 +128,19 @@ export default function ToggleTheme() {
       </button>
       <ul className="menu dropdown-content rounded-box z-[1] w-52 bg-base-100 p-2 shadow">
         <li>
-          <button onClick={() => changePreference("light")}>Light</button>
+          <button type="button" onClick={() => changePreference("light")}>
+            Light
+          </button>
         </li>
         <li>
-          <button onClick={() => changePreference("dark")}>Dark</button>
+          <button type="button" onClick={() => changePreference("dark")}>
+            Dark
+          </button>
         </li>
         <li>
-          <button onClick={() => changePreference("auto")}>Auto</button>
+          <button type="button" onClick={() => changePreference("auto")}>
+            Auto
+          </button>
         </li>
       </ul>
     </div>
