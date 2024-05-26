@@ -6,14 +6,16 @@ interface Props {
 const { tags } = Astro.props;
 ---
 
-<div class="flex not-prose gap-2 py-2">
+<div class="not-prose flex py-1 gap-x-3">
   {
     tags.map(tag => (
-      <p class="btn btn-outline no-animation btn-xs ">
-        <a href={`/tags/${tag}`} class="link">
-          {tag}
-        </a>
-      </p>
+      <a
+        class="text-md text-base-content underline"
+        href={`/tags/${tag}`}
+        class="link"
+      >
+        {tag}
+      </a>
     ))
   }
 </div>

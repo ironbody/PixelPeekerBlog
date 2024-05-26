@@ -9,7 +9,7 @@ const lastThreePosts = allPosts.slice(0, 3);
 <div class="grid lg:grid-cols-3 gap-4 not-prose">
   {
     lastThreePosts.map(post => (
-      <a href={`/posts/${post.slug}`} data-astro-prefetch>
+      <a href={`/blog/${post.slug}`} data-astro-prefetch>
         <div class="card card-compact w-full h-full bg-neutral text-neutral-content">
           <div class="card-body items-center text-center">
             <h2 class="card-title">{post.data.title}</h2>

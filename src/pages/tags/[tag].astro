@@ -1,19 +1,17 @@
 ---
-import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
-import Layout from "@layouts/Layout.astro";
 import type { CollectionEntry } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import type { GetStaticPaths } from "astro";
 
 export const getStaticPaths = (async () => {
   const allPosts = await getCollection("blog");
 
-  const uniqueTags = [
-    ...new Set(allPosts.flatMap((post) => post.data.tags)),
-  ];
+  const uniqueTags = [...new Set(allPosts.flatMap((post) => post.data.tags))];
 
   return uniqueTags.map((tag) => {
     const filteredPosts = allPosts.filter((post) =>
-      post.data.tags?.includes(tag)
+      post.data.tags?.includes(tag),
     );
 
     return {
@@ -24,7 +22,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 interface Props {
-  posts: CollectionEntry<"blog">[]
+  posts: CollectionEntry<"blog">[];
 }
 const { tag } = Astro.params;
 const { posts } = Astro.props;

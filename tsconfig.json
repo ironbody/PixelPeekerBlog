@@ -10,7 +10,7 @@
       "@content/*": ["src/content/*"],
       "@pages/*": ["src/pages/*"],
       "@utils/*": ["src/utils/*"],
-      "@schemas": ["src/schemas.ts"]
+      "@schemas": ["src/content/schemas.ts"]
     }
   }
 }
