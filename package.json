@@ -22,7 +22,7 @@
     "@types/react-dom": "^18.2.8",
     "astro": "4.4.4",
     "astro-icon": "^1.1.0",
-    "daisyui": "^3.6.4",
+    "daisyui": "^4.11.1",
     "date-fns": "^2.30.0",
     "mdast-util-to-string": "^4.0.0",
     "prettier": "^3.0.3",
@@ -34,6 +34,7 @@
     "tailwindcss": "^3.0.24"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.7.3",
     "@tailwindcss/typography": "^0.5.10"
   }
 }
