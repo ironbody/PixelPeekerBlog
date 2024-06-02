@@ -28,13 +28,13 @@ const { tag } = Astro.params;
 const { posts } = Astro.props;
 ---
 
-<Layout title={tag ?? "smth"}>
+<Layout title={tag}>
   <p>Posts tagged with {tag}</p>
   <ul>
     {
       posts.map((post) => (
         <li>
-          <a href={`/posts/${post.slug}`} data-astro-prefetch>{post.data.title}</a>
+          <a href={`/blog/${post.slug}`} data-astro-prefetch>{post.data.title}</a>
         </li>
       ))
     }

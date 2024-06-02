@@ -7,11 +7,12 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "biome check --apply ."
   },
   "dependencies": {
-    "@astrojs/react": "3.0.10",
-    "@astrojs/tailwind": "5.1.0",
+    "@astrojs/react": "^3.0.10",
+    "@astrojs/tailwind": "^5.1.0",
     "@fontsource-variable/kreon": "^5.0.8",
     "@fontsource-variable/rokkitt": "^5.0.13",
     "@fontsource-variable/work-sans": "^5.0.9",
