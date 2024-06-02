@@ -1,13 +1,16 @@
-import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { Moon, Sun } from "./Icons";
 
 export const themes = {
   light: "retro",
   dark: "dracula",
-};
+} as const;
 
-const themeStates = ["light", "dark", "auto"] as const;
-type ThemeStatesType = (typeof themeStates)[number];
+export type ThemeStatesType = keyof typeof themes | "auto";
+export const themeStates = [
+  ...Object.keys(themes),
+  "auto",
+] as unknown as ThemeStatesType;
 
 export default function ToggleTheme() {
   const { userTheme, setUserTheme, systemTheme } =
@@ -21,24 +24,15 @@ export default function ToggleTheme() {
     changePreference(storedTheme as ThemeStatesType);
   }, []);
 
-  function changePreference(newPref: "light" | "dark" | "auto") {
+  function changePreference(newPref: ThemeStatesType) {
+    setUserTheme(newPref);
+    localStorage.setItem("theme", newPref);
     switch (newPref) {
       case "auto":
-        localStorage.setItem("theme", "auto");
         document.documentElement.removeAttribute("data-theme");
-        setUserTheme("auto");
-        break;
-      case "light":
-        localStorage.setItem("theme", "light");
-        document.documentElement.dataset.theme = themes.light;
-        setUserTheme("light");
-        break;
-      case "dark":
-        localStorage.setItem("theme", "dark");
-        document.documentElement.dataset.theme = themes.dark;
-        setUserTheme("dark");
         break;
       default:
+        document.documentElement.dataset.theme = themes[newPref];
         break;
     }
   }
@@ -54,8 +48,8 @@ export default function ToggleTheme() {
     <div className="not-prose dropdown dropdown-end">
       <button type="button" className="btn btn-square btn-ghost no-animation">
         <label
-          htmlFor="theme-button"
           className="swap swap-rotate"
+          htmlFor="theme-button"
           aria-label="theme switcher"
         >
           {/* this hidden checkbox controls the state */}
@@ -96,7 +90,7 @@ export default function ToggleTheme() {
 
 function useTheme<TTheme>(initial: TTheme): {
   userTheme: TTheme;
-  setUserTheme: (t: TTheme) => void;
+  setUserTheme: (theme: TTheme) => void;
   systemTheme: "light" | "dark";
 } {
   const [userTheme, setUserTheme] = useState<TTheme>(initial);
