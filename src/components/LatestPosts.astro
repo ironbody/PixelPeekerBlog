@@ -10,11 +10,8 @@ const lastThreePosts = allPosts.slice(0, 3);
   {
     lastThreePosts.map(post => (
       <a href={`/blog/${post.slug}`} data-astro-prefetch>
-        <div class="card card-compact w-full h-full bg-neutral text-neutral-content">
-          <div class="card-body items-center text-center">
-            <h2 class="card-title">{post.data.title}</h2>
-            <p>{post.data.description}</p>
-          </div>
+        <div class=" w-full h-full bg-neutral text-neutral-content items-center text-center p-4 rounded-lg">
+            <h2 class="leading-tight font-bold">{post.data.title}</h2>
         </div>
       </a>
     ))
