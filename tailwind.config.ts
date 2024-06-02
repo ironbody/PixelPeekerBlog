@@ -1,5 +1,7 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import themes from "daisyui/src/theming/themes";
+import type { Config } from "tailwindcss";
+
+export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
@@ -15,7 +17,7 @@ module.exports = {
     themes: [
       {
         retro: {
-          ...require("daisyui/src/theming/themes").retro,
+          ...themes.retro,
           "--rounded-box": "1rem",
           "--rounded-btn": "0.5rem",
           "--rounded-badge": "1.9rem",
@@ -25,4 +27,4 @@ module.exports = {
     ],
     darkTheme: "dracula",
   },
-};
+} satisfies Config;
