@@ -3,8 +3,6 @@ import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
 import { themes } from "@components/ToggleTheme";
 
-// import "@fontsource-variable/kreon";
-
 interface Props {
   title: string;
 }
@@ -29,14 +27,12 @@ const { title } = Astro.props;
       type="font/ttf"
       crossorigin
     />
+    <link rel="me" href="https://tech.lgbt/@ironbody" />
     <title>{title}</title>
   </head>
   <body class="font-kreon">
-    <script>
-      const themes = {
-        light: "retro",
-        dark: "dracula",
-      };
+    <!--  -->
+    <script is:inline define:vars={{themes}}>
 
       const selected = localStorage.getItem("theme") ?? "";
 
