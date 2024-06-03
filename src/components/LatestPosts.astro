@@ -1,19 +1,27 @@
 ---
 import { getCollection } from "astro:content";
+import { format } from "date-fns";
 
 const allPosts = await getCollection("blog");
 
 const lastThreePosts = allPosts.slice(0, 3);
 ---
 
-<div class="grid lg:grid-cols-3 gap-4 not-prose">
+<div class="grid md:grid-cols-2 gap-4 not-prose">
   {
-    lastThreePosts.map(post => (
-      <a href={`/blog/${post.slug}`} data-astro-prefetch>
-        <div class=" w-full h-full bg-neutral text-neutral-content items-center text-center p-4 rounded-lg">
-            <h2 class="leading-tight font-bold">{post.data.title}</h2>
-        </div>
-      </a>
-    ))
+    lastThreePosts.map(post => {
+      const formattedPubDate = format(post.data.pubDate, "MMM dd, yyyy");
+
+      return (
+        <a href={`/blog/${post.slug}`} data-astro-prefetch>
+          <div class=" w-full h-full bg-neutral text-neutral-content items-center text-center p-4 rounded-lg">
+            <h2 class="leading-tight font-bold text-3xl">{post.data.title}</h2>
+            <i>
+              <p>{formattedPubDate}</p>
+            </i>
+          </div>
+        </a>
+      );
+    })
   }
 </div>

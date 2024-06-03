@@ -2,25 +2,29 @@
 import Social from "./Social.astro";
 ---
 
-<footer class="flex flex-wrap h-56 w-full justify-center gap-4 bg-base-200 py-8">
-  <Social
-    link="https://github.com/ironbody"
-    platform="Github"
-    iconName="mdi:github"
-  />
-  <Social
-    link="https://tech.lgbt/@ironbody"
-    platform="Mastodon"
-    iconName="mdi:mastodon"
-  />
-  <Social
-    link="https://bsky.app/profile/pixelpeeker.gay"
-    platform="Bluesky"
-    iconName="ri:bluesky-fill"
-  />
-  <Social
-    link="https://www.linkedin.com/in/simon-saberian/"
-    platform="LinkedIn"
-    iconName="ri:linkedin-box-fill"
-  />
+<footer class="h-56 w-full bg-base-200 py-8">
+  <div
+    class="flex flex-wrap prose-xl gap-4 mx-auto max-w-prose w-full justify-center"
+  >
+    <Social
+      link="https://github.com/ironbody"
+      platform="Github"
+      iconName="mdi:github"
+    />
+    <Social
+      link="https://tech.lgbt/@ironbody"
+      platform="Mastodon"
+      iconName="mdi:mastodon"
+    />
+    <Social
+      link="https://bsky.app/profile/pixelpeeker.gay"
+      platform="Bluesky"
+      iconName="ri:bluesky-fill"
+    />
+    <Social
+      link="https://www.linkedin.com/in/simon-saberian/"
+      platform="LinkedIn"
+      iconName="ri:linkedin-box-fill"
+    />
+  </div>
 </footer>
