@@ -67,7 +67,7 @@ export default function ToggleTheme() {
           <Moon className="swap-off fill-current" />
         </label>
       </button>
-      <ul className="menu dropdown-content rounded-box z-[1] w-52 bg-base-100 p-2 shadow">
+      <ul className="menu menu-lg dropdown-content rounded-box z-[1] w-fit bg-base-100 shadow">
         <li>
           <button type="button" onClick={() => changePreference("light")}>
             Light
