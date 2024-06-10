@@ -59,6 +59,7 @@ export default function ToggleTheme() {
             type="checkbox"
             checked={isLightMode}
             readOnly
+            tabIndex={-1}
           />
           <p className="sr-only">Theme switcher</p>
 
